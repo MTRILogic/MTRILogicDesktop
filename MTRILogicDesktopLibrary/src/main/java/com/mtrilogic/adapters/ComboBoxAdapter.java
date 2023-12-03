@@ -4,7 +4,7 @@ import com.mtrilogic.abstracts.Model;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -41,13 +41,13 @@ public class ComboBoxAdapter extends DefaultComboBoxModel<Model> {
         addElement(model);
     }
 
-    public void appendModels(Model[] models) {
+    /*/public void appendModels(Model[] models) {
         addAll(Arrays.asList(models));
-    }
+    }*/
 
-    public void appendModelList(List<Model> modelList) {
+    /*/public void appendModelList(List<Model> modelList) {
         addAll(modelList);
-    }
+    }*/
 
     // Insert ==========================================================================================================
 
@@ -57,17 +57,17 @@ public class ComboBoxAdapter extends DefaultComboBoxModel<Model> {
         }
     }
 
-    public void insertModels(int position, Model[] models) {
+    /*/public void insertModels(int position, Model[] models) {
         if (isValidPosition(position)) {
             addAll(position, Arrays.asList(models));
         }
-    }
+    }*/
 
-    public void insertModelList(int position, List<Model> modelList) {
+    /*/public void insertModelList(int position, List<Model> modelList) {
         if (isValidPosition(position)) {
             addAll(position, modelList);
         }
-    }
+    }*/
 
     // Get =============================================================================================================
 

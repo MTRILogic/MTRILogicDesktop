@@ -20,12 +20,12 @@ public class ListAdapter extends DefaultListModel<Model> {
     PUBLIC METHODS
     ==================================================================================================================*/
 
-    public void sort(Comparator<Model> comparator) {
+    /*/public void sort(Comparator<Model> comparator) {
         ArrayList<Model> list = Collections.list(elements());
         list.sort(comparator);
         clear();
         addAll(list);
-    }
+    }*/
 
     // Append ==========================================================================================================
 
@@ -33,13 +33,13 @@ public class ListAdapter extends DefaultListModel<Model> {
         addElement(model);
     }
 
-    public void appendModels(Model[] models) {
+    /*/public void appendModels(Model[] models) {
         addAll(Arrays.asList(models));
-    }
+    }*/
 
-    public void appendModelList(List<Model> modelList) {
+    /*/public void appendModelList(List<Model> modelList) {
         addAll(modelList);
-    }
+    }*/
 
     // Insert ==========================================================================================================
 
@@ -47,17 +47,17 @@ public class ListAdapter extends DefaultListModel<Model> {
         add(position, model);
     }
 
-    public void insertModels(int position, Model[] models) {
+    /*/public void insertModels(int position, Model[] models) {
         if (isValidPosition(position)) {
             addAll(position, Arrays.asList(models));
         }
-    }
+    }*/
 
-    public void insertModelList(int position, List<Model> modelList) {
+    /*/public void insertModelList(int position, List<Model> modelList) {
         if (isValidPosition(position)) {
             addAll(position, modelList);
         }
-    }
+    }*/
 
     // Get =============================================================================================================
 

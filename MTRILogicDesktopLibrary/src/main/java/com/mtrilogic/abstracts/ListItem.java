@@ -6,7 +6,7 @@ import com.mtrilogic.interfaces.ListItemListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.InputEvent;
+//import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -79,19 +79,19 @@ public abstract class ListItem<M extends Model> extends SpringPanel implements L
             // See NOTE in method locationToIndex of the class DefaultList
             public void mouseClicked(MouseEvent e) {
                 int index = list.locationToIndex(e.getPoint());
-                if (index >= 0) {
+                //if (index >= 0) {
                     M model = clazz.cast(getListAdapter().getElementAt(index));
                     listener.onListItemClick(e, model, index);
-                } else {
+                /*/} else {
                     if (!e.isShiftDown() && !isMenuShortcutKeyDown(e)) {
                         list.clearSelection();
                     }
-                }
+                }*/
             }
         };
     }
 
-    private boolean isMenuShortcutKeyDown(InputEvent event) {
+    /*/private boolean isMenuShortcutKeyDown(InputEvent event) {
         return (event.getModifiersEx() & Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()) != 0;
-    }
+    }*/
 }

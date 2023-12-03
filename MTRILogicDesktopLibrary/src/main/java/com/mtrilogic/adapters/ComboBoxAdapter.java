@@ -11,8 +11,6 @@ import java.util.Vector;
 @SuppressWarnings("unused")
 public class ComboBoxAdapter extends DefaultComboBoxModel<Model> {
 
-    private final Class<Model> clazz = Model.class;
-
     /*==================================================================================================================
     CONSTRUCTORS
     ==================================================================================================================*/
@@ -74,7 +72,7 @@ public class ComboBoxAdapter extends DefaultComboBoxModel<Model> {
     // Get =============================================================================================================
 
     public Model getSelectedModel() {
-        return clazz.cast(getSelectedItem());
+        return (Model) getSelectedItem();
     }
 
     public Model getModel(int position) {

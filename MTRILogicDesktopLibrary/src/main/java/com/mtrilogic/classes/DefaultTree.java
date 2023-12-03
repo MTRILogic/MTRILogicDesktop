@@ -46,22 +46,22 @@ public class DefaultTree extends JTree {
     }
 
     /*==================================================================================================================
-    PUBLIC METHODS
+    PUBLIC FINAL METHODS
     ==================================================================================================================*/
 
-    public TreeAdapter getTreeAdapter(){
+    public final TreeAdapter getTreeAdapter(){
         return (TreeAdapter) getModel();
     }
 
-    public void setTreeAdapter(TreeAdapter adapter){
+    public final void setTreeAdapter(TreeAdapter adapter){
         setModel(adapter);
     }
 
-    public <NM extends NodeModel> TreeItem<NM> getTreeItem(Class<TreeItem<NM>> clazz){
+    public final <NM extends NodeModel> TreeItem<NM> getTreeItem(Class<TreeItem<NM>> clazz){
         return clazz.cast(getCellRenderer());
     }
 
-    public <NM extends NodeModel> void setItem(TreeItem<NM> item){
+    public final <NM extends NodeModel> void setItem(TreeItem<NM> item){
         setCellRenderer(item);
     }
 }

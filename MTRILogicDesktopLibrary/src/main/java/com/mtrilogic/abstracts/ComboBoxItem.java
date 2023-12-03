@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 @SuppressWarnings("unused")
 public abstract class ComboBoxItem<M extends Model> extends SpringPanel implements ListCellRenderer<M> {
@@ -16,8 +17,15 @@ public abstract class ComboBoxItem<M extends Model> extends SpringPanel implemen
     protected final DefaultListCellRenderer renderer;
     protected final Class<M> clazz;
 
+    /*==================================================================================================================
+    PUBLIC CONSTRUCTORS
+    ==================================================================================================================*/
 
     protected abstract boolean onComboBoxItemRenderer(DefaultComboBox list, M model, int index, boolean isSelected, boolean cellHasFocus);
+
+    /*==================================================================================================================
+    PUBLIC CONSTRUCTORS
+    ==================================================================================================================*/
 
     public ComboBoxItem(Class<M> clazz, ComboBoxItemListener listener) {
         this(null, clazz, listener);
@@ -30,15 +38,13 @@ public abstract class ComboBoxItem<M extends Model> extends SpringPanel implemen
         this.renderer = renderer;
         this.listener = listener;
         this.clazz = clazz;
-        listener.getDefaultComboBox().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent event) {
-                int index = getDefaultComboBox().getSelectedIndex();
-                M model = clazz.cast(getAdapter().getElementAt(index));
-                listener.onComboBoxItemClick(event, model, index);
-            }
-        });
+
+        getDefaultComboBox().addMouseListener(getMouseListener());
     }
+
+    /*==================================================================================================================
+    OVERRIDE PUBLIC FINAL METHODS
+    ==================================================================================================================*/
 
     @Override
     public final Component getListCellRendererComponent(JList<? extends M> list, M model, int index, boolean isSelected, boolean cellHasFocus) {
@@ -49,11 +55,30 @@ public abstract class ComboBoxItem<M extends Model> extends SpringPanel implemen
         }
     }
 
-    protected DefaultComboBox getDefaultComboBox(){
+    /*==================================================================================================================
+    PROTECTED FINAL METHODS
+    ==================================================================================================================*/
+
+    protected final DefaultComboBox getDefaultComboBox(){
         return listener.getDefaultComboBox();
     }
 
-    protected ComboBoxAdapter getAdapter(){
+    protected final ComboBoxAdapter getComboBoxAdapter(){
         return listener.getComboBoxAdapter();
+    }
+
+    /*==================================================================================================================
+    PRIVATE METHODS
+    ==================================================================================================================*/
+
+    private MouseListener getMouseListener() {
+        return new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                int index = getDefaultComboBox().getSelectedIndex();
+                M model = clazz.cast(getComboBoxAdapter().getElementAt(index));
+                listener.onComboBoxItemClick(event, model, index);
+            }
+        };
     }
 }

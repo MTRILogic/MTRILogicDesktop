@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 public class TableAdapter extends DefaultTableModel {
-
-    private final Class<Model> clazz = Model.class;
 
     /*==================================================================================================================
     CONSTRUCTORS
@@ -43,55 +42,55 @@ public class TableAdapter extends DefaultTableModel {
     }
 
     /*==================================================================================================================
-    PUBLIC OVERRIDE METHODS
+    OVERRIDE PUBLIC FINAL METHODS
     ==================================================================================================================*/
 
     @Override
-    public boolean isCellEditable(int row, int column) {
-        return clazz.cast(getValueAt(row, column)).isEnabled();
+    public final boolean isCellEditable(int row, int column) {
+        return ((Model) getValueAt(row, column)).isEnabled();
     }
 
     @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        ColumnModel columnModel = (ColumnModel) clazz.cast(columnIdentifiers.get(columnIndex));
+    public final Class<?> getColumnClass(int columnIndex) {
+        ColumnModel columnModel = (ColumnModel) columnIdentifiers.get(columnIndex);
         return columnModel.getClazz();
     }
 
     @Override
-    public String getColumnName(int column) {
-        ColumnModel columnModel = (ColumnModel) clazz.cast(columnIdentifiers.get(column));
+    public final String getColumnName(int column) {
+        ColumnModel columnModel = (ColumnModel) columnIdentifiers.get(column);
         return columnModel.getName();
     }
 
     /*==================================================================================================================
-    PUBLIC METHODS
+    PUBLIC FINAL METHODS
     ==================================================================================================================*/
 
-    public void addColumnModels(ColumnModel columnModel, Model[] models) {
+    public final void addColumnModels(ColumnModel columnModel, Model[] models) {
         addColumn(columnModel, models);
     }
 
-    public void addColumnModelList(ColumnModel columnModel, List<Model> modelList) {
+    public final void addColumnModelList(ColumnModel columnModel, List<Model> modelList) {
         addColumn(columnModel, new Vector<>(modelList));
     }
 
-    public void addRowModels(Model[] rowModels) {
+    public final void addRowModels(Model[] rowModels) {
         addRow(rowModels);
     }
 
-    public void addRowModelList(List<Model> rowModelList) {
+    public final void addRowModelList(List<Model> rowModelList) {
         addRow(new Vector<>(rowModelList));
     }
 
     // Insert ==========================================================================================================
 
-    public void insertRowModels(int position, Model[] models) {
+    public final void insertRowModels(int position, Model[] models) {
         if (isValidRowPosition(position)) {
             insertRow(position, models);
         }
     }
 
-    public void insertRowModelList(int position, List<Model> modelList) {
+    public final void insertRowModelList(int position, List<Model> modelList) {
         if (isValidRowPosition(position)) {
             insertRow(position, new Vector<>(modelList));
         }
@@ -99,11 +98,11 @@ public class TableAdapter extends DefaultTableModel {
 
     // Get =============================================================================================================
 
-    public Model getModel(int row, int column) {
-        return clazz.cast(getValueAt(row, column));
+    public final Model getModel(int row, int column) {
+        return (Model) getValueAt(row, column);
     }
 
-    public List<List<Model>> getDataModelList() {
+    public final List<List<Model>> getDataModelList() {
         return getWildCardDataVector().stream()
                 .map(vector -> vector.stream()
                         .map(obj -> (Model)obj)
@@ -113,31 +112,31 @@ public class TableAdapter extends DefaultTableModel {
 
     // Set =============================================================================================================
 
-    public void setModel(int row, int column, Model model) {
+    public final void setModel(int row, int column, Model model) {
         setValueAt(model, row, column);
     }
 
-    public void setDataModels(Model[][] dataModels, String[] columnNames) {
+    public final void setDataModels(Model[][] dataModels, String[] columnNames) {
         setDataVector(dataModels, columnNames);
     }
 
-    public void setDataModelList(List<List<Model>> dataModelList, List<String> columnNameList) {
+    public final void setDataModelList(List<List<Model>> dataModelList, List<String> columnNameList) {
         setDataVector(new Vector<>(dataModelList.stream()
                 .map(Vector::new)
                 .collect(Collectors.toList())), new Vector<>(columnNameList));
     }
 
-    public void setColumnNames(String[] columnNames) {
+    public final void setColumnNames(String[] columnNames) {
         setColumnIdentifiers(columnNames);
     }
 
-    public void setColumnModelList(List<String> columnNameList) {
+    public final void setColumnModelList(List<String> columnNameList) {
         setColumnIdentifiers(new Vector<>(columnNameList));
     }
 
     // Delete ==========================================================================================================
 
-    public void deleteRowModel(int position) {
+    public final void deleteRowModel(int position) {
         removeRow(position);
     }
 

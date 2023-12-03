@@ -14,10 +14,8 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unused")
 public class DefaultTable extends JTable {
 
-    private final Class<Model> clazz = Model.class;
-
     /*==================================================================================================================
-
+    PUBLIC CONSTRUCTORS
     ==================================================================================================================*/
 
     public DefaultTable() {
@@ -51,26 +49,26 @@ public class DefaultTable extends JTable {
     }
 
     /*==================================================================================================================
-    PUBLIC METHODS
+    PUBLIC FINAL METHODS
     ==================================================================================================================*/
 
-    public <M extends Model> M getCellModel(int row, int column, Class<M> clazz) {
+    public final  <M extends Model> M getCellModel(int row, int column, Class<M> clazz) {
         return clazz.cast(getValueAt(row, column));
     }
 
-    public TableAdapter getTableAdapter() {
+    public final TableAdapter getTableAdapter() {
         return (TableAdapter) getModel();
     }
 
-    public void setTableAdapter(TableAdapter adapter) {
+    public final void setTableAdapter(TableAdapter adapter) {
         setModel(adapter);
     }
 
-    public <M extends Model> TableItem<M> getDefaultItem(Class<TableItem<M>> clazz) {
+    public final <M extends Model> TableItem<M> getDefaultItem(Class<TableItem<M>> clazz) {
         return clazz.cast(getDefaultRenderer(String.class));
     }
 
-    public <M extends Model> void setDefaultItem(Class<?> clazz, TableItem<M> item) {
+    public final <M extends Model> void setDefaultItem(Class<?> clazz, TableItem<M> item) {
         setDefaultRenderer(clazz, item);
     }
 }

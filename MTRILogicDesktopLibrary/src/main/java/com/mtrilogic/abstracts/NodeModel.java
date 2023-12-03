@@ -10,6 +10,10 @@ public abstract class NodeModel extends Model implements MutableTreeNode {
 
     protected final DefaultMutableTreeNode node;
 
+    /*==================================================================================================================
+    PUBLIC CONSTRUCTORS
+    ==================================================================================================================*/
+
     public NodeModel(long id, int type, boolean enabled) {
         this(id, type, enabled, false);
     }
@@ -23,6 +27,10 @@ public abstract class NodeModel extends Model implements MutableTreeNode {
         super(id, type, enabled);
         this.node = node;
     }
+
+    /*==================================================================================================================
+    OVERRIDE PUBLIC FINAL METHODS
+    ==================================================================================================================*/
 
     @Override
     public final void insert(MutableTreeNode child, int index) {
@@ -89,7 +97,11 @@ public abstract class NodeModel extends Model implements MutableTreeNode {
         return node.children();
     }
 
-    public DefaultMutableTreeNode getNode() {
+    /*==================================================================================================================
+    PUBLIC FINAL METHODS
+    ==================================================================================================================*/
+
+    public final DefaultMutableTreeNode getNode() {
         return node;
     }
 }

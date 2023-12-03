@@ -2,9 +2,14 @@ package com.mtrilogic.abstracts;
 
 @SuppressWarnings("unused")
 public abstract class Model {
+
     private final boolean enabled;
     private final int type;
     private final long id;
+
+    /*==================================================================================================================
+    PUBLIC CONSTRUCTORS
+    ==================================================================================================================*/
 
     public Model(long id, int type, boolean enabled) {
         this.enabled = enabled;
@@ -12,15 +17,19 @@ public abstract class Model {
         this.id = id;
     }
 
-    public boolean isEnabled() {
+    /*==================================================================================================================
+    PUBLIC FINAL METHODS
+    ==================================================================================================================*/
+
+    public final boolean isEnabled() {
         return enabled;
     }
 
-    public int getType() {
+    public final int getType() {
         return type;
     }
 
-    public long getId() {
+    public final long getId() {
         return id;
     }
 }

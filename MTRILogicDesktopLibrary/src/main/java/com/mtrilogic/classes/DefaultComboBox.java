@@ -34,58 +34,58 @@ public class DefaultComboBox extends JComboBox<Model> {
     }
 
     /*==================================================================================================================
-    PUBLIC METHODS
+    PUBLIC FINAL METHODS
     ==================================================================================================================*/
 
-    public void addModel(Model model){
+    public final void addModel(Model model){
         addItem(model);
     }
 
-    public void insertModel(int position, Model model){
+    public final void insertModel(int position, Model model){
         insertItemAt(model, position);
     }
 
-    public ComboBoxAdapter getComboBoxAdapter(){
+    public final ComboBoxAdapter getComboBoxAdapter(){
         return (ComboBoxAdapter) getModel();
     }
 
-    public Model getModel(int position){
+    public final Model getModel(int position){
         return getItemAt(position);
     }
 
-    public Model[] getSelectedModels(){
+    public final Model[] getSelectedModels(){
         return (Model[]) getSelectedObjects();
     }
 
-    public int getSelectedModelPosition(){
+    public final int getSelectedModelPosition(){
         return getSelectedIndex();
     }
 
-    public int getModelCount(){
+    public final int getModelCount(){
         return getItemCount();
     }
 
-    public void setItem(ComboBoxItem<Model> item){
+    public final void setItem(ComboBoxItem<Model> item){
         setRenderer(item);
     }
 
-    public void setSelectedModel(Model model){
+    public final void setSelectedModel(Model model){
         setSelectedItem(model);
     }
 
-    public void setSelectedModelPosition(int position){
+    public final void setSelectedModelPosition(int position){
         setSelectedIndex(position);
     }
 
-    public void setAdapter(ComboBoxAdapter adapter){
+    public final void setAdapter(ComboBoxAdapter adapter){
         setModel(adapter);
     }
 
-    public void deleteModel(Model model){
+    public final void deleteModel(Model model){
         removeItem(model);
     }
 
-    public void deleteModelPosition(int position){
+    public final void deleteModelPosition(int position){
         removeItemAt(position);
     }
 }

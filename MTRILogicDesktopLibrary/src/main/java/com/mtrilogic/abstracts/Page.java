@@ -1,15 +1,23 @@
 package com.mtrilogic.abstracts;
 
 @SuppressWarnings("unused")
-public abstract class Page extends Model{
+public abstract class Page extends Model {
 
     private String title, tag;
+
+    /*==================================================================================================================
+    PUBLIC CONSTRUCTORS
+    ==================================================================================================================*/
 
     public Page(long id, int type, boolean enabled, String title, String tag) {
         super(id, type, enabled);
         this.title = title;
         this.tag = tag;
     }
+
+    /*==================================================================================================================
+    PUBLIC FINAL METHODS
+    ==================================================================================================================*/
 
     public final void setTitle(String title) {
         this.title = title;

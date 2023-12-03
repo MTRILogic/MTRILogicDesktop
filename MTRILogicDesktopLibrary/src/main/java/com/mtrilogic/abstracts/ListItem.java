@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 @SuppressWarnings("unused")
 public abstract class ListItem<M extends Model> extends SpringPanel implements ListCellRenderer<M> {
@@ -17,7 +18,15 @@ public abstract class ListItem<M extends Model> extends SpringPanel implements L
     protected final ListItemListener listener;
     protected final Class<M> clazz;
 
+    /*==================================================================================================================
+    PROTECTED ABSTRACT METHODS
+    ==================================================================================================================*/
+
     protected abstract boolean onListItemRenderer(DefaultList list, M model, int index, boolean isSelected, boolean cellHasFocus);
+
+    /*==================================================================================================================
+    PUBLIC CONSTRUCTORS
+    ==================================================================================================================*/
 
     public ListItem(Class<M> clazz, ListItemListener listener){
         this(null, clazz, listener);
@@ -30,8 +39,13 @@ public abstract class ListItem<M extends Model> extends SpringPanel implements L
         this.renderer = renderer;
         this.listener = listener;
         this.clazz = clazz;
-        addMouseListener();
+
+        getDefaultList().addMouseListener(getMouseListener());
     }
+
+    /*==================================================================================================================
+    OVERRIDE PUBLIC FINAL METHODS
+    ==================================================================================================================*/
 
     @Override
     public final Component getListCellRendererComponent(JList<? extends M> list, M model, int index, boolean isSelected, boolean cellHasFocus) {
@@ -42,17 +56,25 @@ public abstract class ListItem<M extends Model> extends SpringPanel implements L
         }
     }
 
-    protected DefaultList getDefaultList(){
+    /*==================================================================================================================
+    PROTECTED FINAL METHODS
+    ==================================================================================================================*/
+
+    protected final DefaultList getDefaultList(){
         return listener.getDefaultList();
     }
 
-    protected ListAdapter getListAdapter(){
+    protected final ListAdapter getListAdapter(){
         return listener.getListAdapter();
     }
 
-    protected void addMouseListener() {
+    /*==================================================================================================================
+    PRIVATE METHODS
+    ==================================================================================================================*/
+
+    private MouseListener getMouseListener() {
         DefaultList list = getDefaultList();
-        list.addMouseListener(new MouseAdapter() {
+        return new MouseAdapter() {
             @Override
             // See NOTE in method locationToIndex of the class DefaultList
             public void mouseClicked(MouseEvent e) {
@@ -66,7 +88,7 @@ public abstract class ListItem<M extends Model> extends SpringPanel implements L
                     }
                 }
             }
-        });
+        };
     }
 
     private boolean isMenuShortcutKeyDown(InputEvent event) {

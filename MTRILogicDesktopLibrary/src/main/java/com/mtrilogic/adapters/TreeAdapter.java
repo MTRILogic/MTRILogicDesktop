@@ -7,6 +7,10 @@ import javax.swing.tree.DefaultTreeModel;
 @SuppressWarnings("unused")
 public class TreeAdapter extends DefaultTreeModel {
 
+    /*==================================================================================================================
+    CONSTRUCTORS
+    ==================================================================================================================*/
+
     public TreeAdapter(NodeModel rootItem) {
         super(rootItem);
     }
@@ -15,27 +19,31 @@ public class TreeAdapter extends DefaultTreeModel {
         super(rootModel, asksAllowsChildren);
     }
 
-    public NodeModel getRootModel(){
+    /*==================================================================================================================
+    PUBLIC FINAL METHODS
+    ==================================================================================================================*/
+
+    public final NodeModel getRootModel(){
         return (NodeModel) getRoot();
     }
 
-    public NodeModel getChildModel(NodeModel parentModel, int position){
+    public final NodeModel getChildModel(NodeModel parentModel, int position) {
         return (NodeModel) getChild(parentModel, position);
     }
 
-    public int getChildModelCount(NodeModel parentModel){
+    public final int getChildModelCount(NodeModel parentModel){
         return getChildCount(parentModel);
     }
 
-    public int getChildModelPosition(NodeModel parentModel, NodeModel childModel){
+    public final int getChildModelPosition(NodeModel parentModel, NodeModel childModel) {
         return getIndexOfChild(parentModel, childModel);
     }
 
-    public void setRootModel(NodeModel rootModel){
+    public final void setRootModel(NodeModel rootModel){
         setRoot(rootModel);
     }
 
-    public void insertChildModel(NodeModel parentModel, int position, NodeModel childModel){
+    public final void insertChildModel(NodeModel parentModel, int position, NodeModel childModel) {
         insertNodeInto(childModel, parentModel, position);
     }
 }

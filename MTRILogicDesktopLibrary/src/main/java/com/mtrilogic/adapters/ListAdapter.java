@@ -23,10 +23,8 @@ public class ListAdapter extends DefaultListModel<Model> {
     public void sort(Comparator<Model> comparator) {
         ArrayList<Model> list = Collections.list(elements());
         list.sort(comparator);
-        removeAllElements();
-        for (Model model : list) {
-            addElement(model);
-        }
+        clear();
+        addAll(list);
     }
 
     // Append ==========================================================================================================
@@ -36,13 +34,11 @@ public class ListAdapter extends DefaultListModel<Model> {
     }
 
     public void appendModels(Model[] models) {
-        for (Model model : models) {
-            addElement(model);
-        }
+        addAll(Arrays.asList(models));
     }
 
-    public void appendModelList(List<Model> list) {
-        addAll(list);
+    public void appendModelList(List<Model> modelList) {
+        addAll(modelList);
     }
 
     // Insert ==========================================================================================================
@@ -53,17 +49,13 @@ public class ListAdapter extends DefaultListModel<Model> {
 
     public void insertModels(int position, Model[] models) {
         if (isValidPosition(position)) {
-            for (Model model : models) {
-                add(position++, model);
-            }
+            addAll(position, Arrays.asList(models));
         }
     }
 
-    public void insertModelList(int position, List<Model> list) {
+    public void insertModelList(int position, List<Model> modelList) {
         if (isValidPosition(position)) {
-            for (Model model : list) {
-                add(position++, model);
-            }
+            addAll(position, modelList);
         }
     }
 
@@ -90,6 +82,18 @@ public class ListAdapter extends DefaultListModel<Model> {
         return modelList;
     }
 
+    public int getModelIndex(Model model) {
+        return indexOf(model);
+    }
+
+    public int getModelIndex(int position, Model model) {
+        return isValidPosition(position) ? indexOf(model, position) : -1;
+    }
+
+    public int getModelCount() {
+        return getSize();
+    }
+
     // Set =============================================================================================================
 
     public Model setModel(int position, Model model) {
@@ -112,17 +116,17 @@ public class ListAdapter extends DefaultListModel<Model> {
         return oldList;
     }
 
-    // Remove ==========================================================================================================
+    // Delete ==========================================================================================================
 
-    public Model removePosition(int position) {
+    public Model deletePosition(int position) {
         return isValidPosition(position) ? remove(position) : null;
     }
 
-    public boolean removeModel(Model model) {
+    public boolean deleteModel(Model model) {
         return removeElement(model);
     }
 
-    public Model[] removePositions(int[] positions) {
+    public Model[] deletePositions(int[] positions) {
         Model[] models = new Model[positions.length];
         for (int i = 0; i < positions.length; i++) {
             models[i] = remove(positions[i]);
@@ -130,7 +134,7 @@ public class ListAdapter extends DefaultListModel<Model> {
         return models;
     }
 
-    public boolean[] removeModels(Model[] models) {
+    public boolean[] deleteModels(Model[] models) {
         boolean[] removed = new boolean[models.length];
         for (int i = 0; i < models.length; i++) {
             removed[i] = removeElement(models[i]);
@@ -138,7 +142,7 @@ public class ListAdapter extends DefaultListModel<Model> {
         return removed;
     }
 
-    public List<Model> removePositionList(List<Integer> positions) {
+    public List<Model> deletePositionList(List<Integer> positions) {
         List<Model> modelList = new ArrayList<>();
         for (int position : positions) {
             modelList.add(remove(position));
@@ -146,7 +150,7 @@ public class ListAdapter extends DefaultListModel<Model> {
         return modelList;
     }
 
-    public List<Boolean> removeModelList(List<Model> models) {
+    public List<Boolean> deleteModelList(List<Model> models) {
         List<Boolean> removeList = new ArrayList<>();
         for (Model model : models) {
             removeList.add(removeElement(model));
@@ -154,26 +158,10 @@ public class ListAdapter extends DefaultListModel<Model> {
         return removeList;
     }
 
-    // Index ===========================================================================================================
-
-    public int getModelIndex(Model model) {
-        return indexOf(model);
-    }
-
-    public int getModelIndex(int position, Model model) {
-        return isValidPosition(position) ? indexOf(model, position) : -1;
-    }
-
-    // Size ============================================================================================================
-
-    public int getModelCount() {
-        return getSize();
-    }
-
     // Clear ===========================================================================================================
 
     public void clearModels() {
-        removeAllElements();
+        clear();
     }
 
     /*==================================================================================================================

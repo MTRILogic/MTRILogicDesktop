@@ -12,6 +12,10 @@ import java.util.Vector;
 @SuppressWarnings("unused")
 public class DefaultList extends JList<Model> {
 
+    /*==================================================================================================================
+    CONSTRUCTORS
+    ==================================================================================================================*/
+
     public DefaultList(ListAdapter adapter) {
         super(adapter);
     }
@@ -28,26 +32,34 @@ public class DefaultList extends JList<Model> {
         super();
     }
 
-    public ListAdapter getListAdapter(){
+    /*==================================================================================================================
+    PUBLIC FINAL METHODS
+    ==================================================================================================================*/
+
+    public final ListAdapter getListAdapter(){
         return (ListAdapter) getModel();
     }
 
-    public void setAdapter(ListAdapter adapter){
+    public final void setListAdapter(ListAdapter adapter){
         setModel(adapter);
     }
 
-    public ListItem<Model> getItem(Class<ListItem<Model>> clazz){
+    public final ListItem<Model> getItem(Class<ListItem<Model>> clazz){
         return clazz.cast(getCellRenderer());
     }
 
-    public void setItem(ListItem<Model> item){
+    public final void setItem(ListItem<Model> item){
         setCellRenderer(item);
     }
+
+    /*==================================================================================================================
+    OVERRIDE PUBLIC FINAL METHODS
+    ==================================================================================================================*/
 
     // NOTE: Helps prevent the last item from being selected when clicking on a blank space
     // https://stackoverflow.com/questions/11138665/how-to-prevent-jlist-from-making-selection-outside-cell-bounds
     @Override
-    public int locationToIndex(Point location) {
+    public final int locationToIndex(Point location) {
         int index = super.locationToIndex(location);
         if (index != -1 && !getCellBounds(index, index).contains(location)) {
             return -1;

@@ -53,6 +53,7 @@ public abstract class BaseFrame extends JFrame implements PanelListener {
     PROTECTED METHODS
     ==================================================================================================================*/
 
+    @SuppressWarnings("SameReturnValue")
     protected boolean onFrameConfiguration(Dimension dimension) {
         setDefaultLookAndFeelDecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,5 +1,6 @@
 package com.mtrilogic.abstracts;
 
+@SuppressWarnings("unused")
 public abstract class ColumnModel extends Model {
 
     private final Class<? extends Model> clazz;

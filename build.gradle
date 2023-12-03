@@ -5,6 +5,15 @@ plugins {
 group = 'com.mtrilogic.samples'
 version = '1.0-SNAPSHOT'
 
+allprojects {
+    repositories {
+        maven {
+            name 'JitPack'
+            url 'https://jitpack.io'
+        }
+    }
+}
+
 repositories {
     mavenCentral()
 }
